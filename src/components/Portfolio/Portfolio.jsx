@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { projects } from './projects.data'
+import { projects } from '../../constants/projects.data'
 import SectionShell from '../SectionShell'
 import CaseCardModal from './ProjectModal'
 

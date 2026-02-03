@@ -1,10 +1,11 @@
 import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import { OrbitControls, Preload, useGLTF } from '@react-three/drei'
 import { useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { useRef } from 'react'
+import React, { Suspense, useEffect, useState, useRef } from 'react'
+import Loader from '../components/Loader'
 
-function SpaceshipModel() {
+const SpaceshipModel = ({ isMobile }) => {
   const groupRef = useRef()
   const gltf = useLoader(GLTFLoader, '/spaceship/scene.gltf')
 
@@ -16,32 +17,62 @@ function SpaceshipModel() {
   })
 
   return (
-    <group ref={groupRef}>
-      <primitive object={gltf.scene} scale={1.5} />
-    </group>
-  )
-}
-
-export default function Spaceship() {
-  return (
-    <Canvas
-      camera={{ position: [0, 2, 12], fov: 40 }}
-      style={{ width: '100%', height: '100%', display: 'block' }}
-    >
+    <mesh ref={groupRef}>
       <ambientLight intensity={0.6} />
       <directionalLight position={[15, 15, 15]} intensity={1.5} />
       <pointLight position={[-15, -10, 10]} intensity={0.8} color="#ff9500" />
       <pointLight position={[15, 10, 10]} intensity={0.5} color="#4a9eff" />
-      <SpaceshipModel />
+      <primitive
+        object={gltf.scene}
+        scale={isMobile ? 0.5 : 1.5}
+        position={[0, -7.0, 0]}
+      />
       <OrbitControls
         enableZoom={false}
         autoRotate={false}
         rotateSpeed={0.1}
-        minDistance={30}
-        maxDistance={25}
+        minDistance={80}
         minPolarAngle={Math.PI / 2}
         maxPolarAngle={Math.PI / 2}
       />
+    </mesh>
+  )
+}
+
+export default function Spaceship() {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 500px)')
+    setIsMobile(mediaQuery.matches)
+
+    const handleMediaQueryChange = (event) => {
+      setIsMobile(event.matches)
+    }
+
+    mediaQuery.addEventListener('change', handleMediaQueryChange)
+    return () =>
+      mediaQuery.removeEventListener('change', handleMediaQueryChange)
+  }, [])
+
+  return (
+    <Canvas
+      frameloop="always"
+      shadows
+      dpr={[1, 2]}
+      camera={{ position: [0, 0, 5], fov: 25 }}
+      gl={{ preserveDrawingBuffer: true, alpha: true }}
+      style={{ width: '100%', height: '100vh' }}
+    >
+      <Suspense fallback={<Loader />}>
+        <OrbitControls
+          enableZoom={false}
+          maxPolarAngle={Math.PI / 2}
+          minPolarAngle={Math.PI / 2}
+        />
+        <SpaceshipModel isMobile={isMobile} />
+      </Suspense>
+      <Preload all />
     </Canvas>
   )
 }
