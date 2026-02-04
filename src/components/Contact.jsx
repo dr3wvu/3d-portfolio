@@ -1,60 +1,35 @@
-import React, { useRef, useLayoutEffect, useState } from 'react'
+import React, { useRef, useState } from 'react'
+import { motion } from 'framer-motion'
 import SectionShell from './SectionShell'
 import Earth from '../three/Globe'
 import Stars from '../three/Stars'
 import Footer from './Footer'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import emailjs from '@emailjs/browser'
 
-gsap.registerPlugin(ScrollTrigger)
+const slideIn = (direction, delay) => ({
+  hidden: {
+    x: direction === 'left' ? -150 : 150,
+    opacity: 0,
+  },
+  show: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      type: 'tween',
+      delay: delay,
+      duration: 1.2,
+      ease: [0.25, 0.1, 0.25, 1],
+    },
+  },
+})
 
 export default function Contact() {
-  const sectionRef = useRef(null)
-  const formWrapperRef = useRef(null)
   const formRef = useRef(null)
-  const globeContainerRef = useRef(null)
-
   const [loading, setLoading] = useState(false)
+
   const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
   const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
   const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-          // markers: true,
-        },
-      })
-
-      tl.fromTo(
-        formWrapperRef.current,
-        { x: -150, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 1.8,
-          ease: 'power4.out',
-        }
-      ).fromTo(
-        globeContainerRef.current,
-        { x: 150, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 1.8,
-          ease: 'power4.out',
-        },
-        '-=1.4'
-      )
-    }, sectionRef)
-
-    return () => ctx.revert()
-  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -77,13 +52,18 @@ export default function Contact() {
   return (
     <div id="contact-wrapper">
       <SectionShell id="contact" label="Contact" desc="Get in touch">
-        <div className="contact-stars absolute inset-0">
+        <div className="contact-stars">
           <Stars />
         </div>
 
-        <div className="contact-section" ref={sectionRef}>
-          {/* FORM */}
-          <div className="contact-form-wrapper" ref={formWrapperRef}>
+        <div className="contact-section">
+          <motion.div
+            className="contact-form-wrapper"
+            variants={slideIn('left', 0.2)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <form
               ref={formRef}
               onSubmit={handleSubmit}
@@ -120,10 +100,17 @@ export default function Contact() {
                 {loading ? 'Sending...' : 'Send'}
               </button>
             </form>
-          </div>
-          <div className="globe-container" ref={globeContainerRef}>
+          </motion.div>
+
+          <motion.div
+            className="globe-container"
+            variants={slideIn('right', 0.4)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <Earth />
-          </div>
+          </motion.div>
         </div>
       </SectionShell>
       <Footer />
