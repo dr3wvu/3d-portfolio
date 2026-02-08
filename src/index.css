@@ -659,7 +659,7 @@ p {
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   position: relative;
   color: var(--text-primary);
-  max-width: min(900px, 92vw);
+  max-width: min(1200px, 95vw);
   border-radius: 18px;
   overflow: hidden;
   display: grid;
