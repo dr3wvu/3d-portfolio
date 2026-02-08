@@ -1,7 +1,6 @@
-import SignalStrength from '../assets/SignalStrength.png'
-import Liveview from '../assets/liveview.png'
-import Tracking from '../assets/tracking.gif'
-import Cascade from '../assets/cascade.gif'
+import Map from '../assets/map.gif'
+import Cascade from '../assets/Cascading.gif'
+import Device from '../assets/device-dashboard.png'
 import Weather from '../assets/weather.png'
 import Survey from '../assets/survey.png'
 import Document from '../assets/Document.png'
@@ -50,11 +49,11 @@ export const projects = [
   },
   {
     id: 6,
-    title: 'XSight',
-    frames: [SignalStrength, Liveview, Tracking, Cascade],
-    desc: 'Developed data driven dashboards and visualizations for read time device visibility',
-    stack: ['Angular', 'Redux', 'C#', 'SQL'],
-    github: null,
+    title: 'OverWatch Dashboard',
+    frames: [Cascade, Map, Device],
+    desc: 'Developed data driven dashboards and visualizations using HighchartJS and Leaflet to track and monitor device information',
+    stack: ['React', 'HighchartJS', 'Leaflet'],
+    github: 'https://github.com/dr3wvu/device-dashboard',
     codepen: null,
   },
 ]
