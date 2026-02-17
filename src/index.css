@@ -776,7 +776,9 @@ p {
   justify-content: space-between;
   align-items: center;
   overflow: hidden;
-  padding: 4rem 0;
+  padding: 4rem 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 .globe-container {
