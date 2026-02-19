@@ -1,6 +1,7 @@
 # Andrew Vu - 3D Interactive Portfolio
 
 A modern, fully interactive 3D portfolio built with React, Three.js, GSAP and Tailwind CSS. Features immersive 3D models, smooth animations, and a comprehensive showcase of projects and experience.
+Check it out here: https://andrewvu.ca/
 
 ## 🌟 Features
 
