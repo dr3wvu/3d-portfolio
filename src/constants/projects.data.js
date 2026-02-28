@@ -5,24 +5,34 @@ import Weather from '../assets/weather.png'
 import Survey from '../assets/survey.png'
 import Document from '../assets/Document.png'
 import NetflixClone from '../assets/netflixClone.png'
-
 import SOTIIcon from '../assets/SOTI.png'
 import TDIcon from '../assets/TD.png'
-
 import Ontario from '../assets/ontario.png'
+import SignUp from '../assets/signup-page.png'
+import Watchlist from '../assets/watchlist-stock.gif'
+import Stock from '../assets/stock-app.gif'
 
 export const projects = [
   {
     id: 1,
-    title: 'Netflix Clone',
-    frames: [NetflixClone],
-    desc: 'A cinematic browser experience designed to mimic Netflix, built with React and AstraDB for seamless streaming.',
-    stack: ['React', 'GraphQL', 'AstraDB'],
-    github: 'https://github.com/yourrepo',
+    title: 'Watchlist',
+    frames: [SignUp, Watchlist, Stock],
+    desc: 'Stock market web application built with Next.js, designed to help users search for and track their favorite stocks using Finnhub to access real-time stock data, receive daily market news, and manage personalized watchlists. The app features betterAuth authentication, real-time updates, and automated email notifications.',
+    stack: [
+      'React',
+      'Tailwind',
+      'MongoDB',
+      'betterAUTH',
+      'Shadcn',
+      'Nodemailer',
+      'Inngest',
+      'Finnhub',
+    ],
+    github: 'https://github.com/dr3wvu/watchlist',
+    codepen: null,
   },
-
   {
-    id: 3,
+    id: 2,
     title: 'Free Weather App',
     frames: [Weather],
     desc: 'Used openweather API to get your current location weather information.',
@@ -30,7 +40,24 @@ export const projects = [
     codepen: 'https://codepen.io/bob17/full/JpgXRr',
   },
   {
+    id: 3,
+    title: 'OverWatch Dashboard',
+    frames: [Cascade, Map, Device],
+    desc: 'Developed data driven dashboards and visualizations using HighchartJS and Leaflet to track and monitor device information',
+    stack: ['React', 'HighchartJS', 'Leaflet'],
+    github: 'https://github.com/dr3wvu/device-dashboard',
+    codepen: null,
+  },
+  {
     id: 4,
+    title: 'Netflix Clone',
+    frames: [NetflixClone],
+    desc: 'A cinematic browser experience designed to mimic Netflix, built with React and AstraDB for seamless streaming.',
+    stack: ['React', 'GraphQL', 'AstraDB'],
+    github: 'https://github.com/yourrepo',
+  },
+  {
+    id: 5,
     title: 'Survey Form',
     frames: [Survey],
     desc: 'Used HTML, CSS, and JavaScript to build a responsive survey form with validation.',
@@ -39,21 +66,12 @@ export const projects = [
     codepen: 'https://codepen.io/bob17/full/ymeeZe',
   },
   {
-    id: 5,
+    id: 6,
     title: 'Documentation',
     frames: [Document],
     desc: '',
     stack: ['HTML', 'CSS', 'JavaScript'],
     github: null,
-    codepen: null,
-  },
-  {
-    id: 6,
-    title: 'OverWatch Dashboard',
-    frames: [Cascade, Map, Device],
-    desc: 'Developed data driven dashboards and visualizations using HighchartJS and Leaflet to track and monitor device information',
-    stack: ['React', 'HighchartJS', 'Leaflet'],
-    github: 'https://github.com/dr3wvu/device-dashboard',
     codepen: null,
   },
 ]
